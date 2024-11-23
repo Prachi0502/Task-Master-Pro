@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('git checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/gitapurohit/Task-Master-Pro.git'
+                git branch: 'main', url: 'https://github.com/prachi0502/Task-Master-Pro.git'
             }
         }
         stage('mvn compile') {
