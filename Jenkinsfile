@@ -16,40 +16,40 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/prachi0502/Task-Master-Pro.git'
             }
         }
-        stage('mvn compile') {
-            steps {
-                sh "mvn compile"
-            }
-        }
-         stage('mvntest') {
-            steps {
-                sh "mvn test"
-            }
-        }
+        // stage('mvn compile') {
+        //     steps {
+        //         sh "mvn compile"
+        //     }
+        // }
+        //  stage('mvntest') {
+        //     steps {
+        //         sh "mvn test"
+        //     }
+        // }
         //  stage('trivy') {
         //     steps {
         //         sh "trivy fs --format table -o trivy-fs-report.html ."
         //     }
         // }
-        stage('SonarQube Analysis') {
-             steps {
-               withSonarQubeEnv('sonar') {
-                sh '''
-                  $SCANNER_HOME/bin/sonar-scanner \
-                  -Dsonar.projectName=Task-Master-Pro \
-                  -Dsonar.projectKey=Task-Master-Pro \
-                  -Dsonar.java.binaries=.
-                '''
-        }
-    }
-}
-        stage('SonarQuality') {
-            steps {
-                script { 
-                    waitForQualityGate abortPipeline: false, credentialsID: 'sonar-token'
-                }
-            }
-        }
+//         stage('SonarQube Analysis') {
+//              steps {
+//                withSonarQubeEnv('sonar') {
+//                 sh '''
+//                   $SCANNER_HOME/bin/sonar-scanner \
+//                   -Dsonar.projectName=Task-Master-Pro \
+//                   -Dsonar.projectKey=Task-Master-Pro \
+//                   -Dsonar.java.binaries=.
+//                 '''
+//         }
+//     }
+// }
+//         stage('SonarQuality') {
+//             steps {
+//                 script { 
+//                     waitForQualityGate abortPipeline: false, credentialsID: 'sonar-token'
+//                 }
+//             }
+//         }
         stage('mvn build') {
             steps {
                 sh "mvn package"
@@ -66,7 +66,7 @@ pipeline {
         stage('Docker build') {
             steps {
                 withDockerRegistry(credentialsId: 'docker-cred', url: '') {
-                 sh "docker build -t gita/task-master:latest ."
+                 sh "docker build -t prachi0502/task-master:latest ."
                 
                 
             }
