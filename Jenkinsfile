@@ -80,7 +80,7 @@ pipeline {
         stage('Docker push') {
             steps {
                 withDockerRegistry(credentialsId: 'docker-cred', url: '') {
-                 sh "docker push gita/task-master:latest"
+                 sh "docker push prachi0502/task-master:latest"
                 
                 
             }
